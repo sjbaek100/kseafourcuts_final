@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Camera</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ url_for('static', filename='cam.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+</head>
+<body>
+  <div class="info" id="info" style="display: none;">
+    <div id="timer">10</div>
+    <div id="count">0/4</div>
+  </div>
+
+  <div class="cambox">
+    <!-- 📸 카메라 화면 -->
+    <div class="camera">
+      <!-- 🔄 Flask 실시간 프리뷰 -->
+      <img id="live-view" src="/preview" style="width: 100%; max-width: 600px;" />
+    </div>
+  </div>
+
+  <div id="shooting-overlay" class="shooting" style="display: none;">
+    <div class="overlay-text">📸 사진 촬영 중입니다...</div>
+  </div>
+  
+
+  <!-- 🪟 팝업 -->
+  <div class="popup" id="popup">
+    <p>Click start to take photos.<br>촬영을 위해 Start 버튼을 눌러주세요.</p>
+    <button id="start">Start</button>
+  </div>
+
+  <!-- 📤 촬영 완료 시 자동 제출 -->
+  <form action="{{ url_for('shoot') }}" method="post" id="shoot-form" style="display: none;"></form>
+
+  <audio id="shutter" src="{{ url_for('static', filename='shutter.mp3') }}"></audio>
+
+  <script src="{{ url_for('static', filename='cam.js') }}"></script>
+</body>
+</html>

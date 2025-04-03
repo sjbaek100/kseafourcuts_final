@@ -1,0 +1,155 @@
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('/static/Cafe24Ssurround-v2.0.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html{
+    width:100%;
+    height: 100%;
+}
+body{
+    background-color:rgb(255, 255, 255);
+    width:100%;
+    height: 100%;
+    position: relative;
+}
+
+.info{
+    padding:5%;
+}
+
+#timer {
+    font-size: 3em;
+    font-family: 'Cafe24Ssurround';
+    font-weight: 50;
+    color: rgb(0, 0, 0);
+    width: 10%;
+}
+
+#timer div {
+    display: inline-block;
+    min-width: 45px;
+    padding: 5px;
+    background: #020b43;
+    border-radius: 80px;
+    border: 2px solid #3954A6;
+    text-align: center;
+}
+
+#timer div span {
+    font-family: 'Cafe24Ssurround';
+    color: #ffffff;
+    display: block;
+    margin-top: 15px;
+    font-size: .10em;
+    font-weight: 200;
+}
+#count {
+    font-size: 25pt;
+    font-family: 'Cafe24Ssurround';
+    font-weight: bold;
+}
+
+.cambox{
+    border-color: #3954A6;
+    border-style:solid;
+    border-top-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
+    border-right-width: medium;
+    border-radius: 0px;
+    width: 100%;
+    max-width: 65vw;
+    height: 100%; 
+    max-height: 75vh;
+    padding: 5px 5px 5px 5px;
+    border-width: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.camera{
+    width: 100%;
+    max-width: 65vw;
+    height: 100%;
+    max-height: 75vh;
+}
+video#cam {
+    aspect-ratio: 4 / 3 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transform: scaleX(-1) !important;
+}
+
+p{
+    font-size: 25pt;
+    color:rgb(0, 0, 0);
+    font-family: 'Cafe24Ssurround';
+}
+
+.popup {
+    display: grid; /*hide setting*/
+    gap: 30%;
+    position: fixed;
+    left: 29%;
+    top: 25%;
+    z-index: 10;
+    background: transparent;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+p{
+    font-size: 25pt;
+    color:rgb(0, 0, 0);
+    font-family: 'Cafe24Ssurround';
+    text-align: center;
+    line-height: 3;
+    margin-left: -3%;
+}
+
+#start {
+    font-family: 'Cafe24Ssurround';
+    font-size: xx-large;
+    color: white;
+    border-color: #3954A6;
+    width: 250px;
+    height: 75px;
+    background-color: #3954A6;
+    margin-left: 21%;
+    margin-top: -10%;
+    border-radius: 50px;
+    display: block;
+    border-style: solid;
+    border-width: medium;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#start:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #3954A6;
+}
+
+.cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    z-index: 1;
+    backdrop-filter: blur(30px);
+    transition: all ease 1s;
+}
+
