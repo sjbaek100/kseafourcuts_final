@@ -1,9 +1,12 @@
-# utils/prepare_image.py
-
 import subprocess
+import os
 
 def prepare_image_for_print(input_path, output_path):
     try:
+        # 절대경로로 변환
+        input_path = os.path.abspath(input_path)
+        output_path = os.path.abspath(output_path)
+
         command = [
             "magick", input_path,
             "-resize", "1000x",

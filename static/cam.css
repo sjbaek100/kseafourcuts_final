@@ -62,7 +62,7 @@ body{
     border-radius: 0px;
     width: 100%;
     max-width: 65vw;
-    height: 100%; 
+    height: auto; 
     max-height: 75vh;
     padding: 5px 5px 5px 5px;
     border-width: 10px;
@@ -101,13 +101,16 @@ p{
     display: grid; /*hide setting*/
     gap: 30%;
     position: fixed;
-    left: 29%;
-    top: 25%;
-    z-index: 10;
+    left: 1.7%;
+    top: 11.8%;
+    z-index: 9999;
     background: transparent;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #ffffff;
+    height: 430px;
+    width: 1000px;
 }
 
 p{
