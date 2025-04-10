@@ -36,19 +36,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (countdown <= 0) {
           clearInterval(countdownInterval);
+          timerDisplay.textContent = "DO NOT MOVE! 절대 움직이지 마세요!";
+          timerDisplay.style.color = "red";
           shutterSound.play();
 
-          fetch('/capture', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ index: photoCount })
-          })
+          // ✅✅✅ 여기가 수정된 부분!
+          fetch('/stop_preview')
+            .then(() => {
+              console.log("✅ 프리뷰 정상 종료됨 → 촬영 시작");
+              return fetch('/capture', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ index: photoCount })
+              });
+            })
             .then(res => res.json())
             .then(data => {
               if (data.success) {
                 console.log(`${photoCount}번째 사진 촬영 성공`);
-                // fetch('/preview');
-                setTimeout(takeNextPhoto, 2000);
+                setTimeout(takeNextPhoto, 3000); // 다음 컷으로 이동
               } else {
                 console.error(`${photoCount}번째 사진 실패:`, data.error);
                 alert(`❌ ${photoCount}번째 사진 실패: ${data.error}`);
