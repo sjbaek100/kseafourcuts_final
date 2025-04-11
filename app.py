@@ -8,8 +8,10 @@ from utils.lastest import get_latest_photo_folder
 from utils.printer import print_image
 from utils.prepare_image import prepare_image_for_print
 from utils.upload_all import upload_all_final_images
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5050"}})
 app.secret_key = 'stephaniejiwonbaek_pleasethisbemyfinalonoe'
 
 @app.route('/')
@@ -28,16 +30,9 @@ def cam():
 
 @app.route('/preview')
 def preview():
-    camera.stop_streaming_event.clear()
     camera.start_streaming()
     return Response(camera.generate_preview(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/stop_preview')
-def stop_preview():
-    camera.stop_streaming_event.set()
-    camera.stop_streaming()
-    return 'Stream stopped', 200
 
 @app.route("/capture", methods=["POST"])
 def capture():
@@ -136,4 +131,5 @@ def log_and_serve(session_folder):
     return send_file(f'deploy/{session_folder}/final.jpg')
 
 if __name__ == '__main__':
+    camera.system_initialize()  # ✅ 시스템 시작할 때 1회만 초기화!
     app.run(debug=False, host='0.0.0.0', port=5050)

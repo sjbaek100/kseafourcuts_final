@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     popup.style.display = "none";
     infoBox.style.display = "block";
+    document.getElementById("live-view").src = "http://127.0.0.1:5051/preview";
 
     startPhotoSequence();
   });
@@ -20,7 +21,16 @@ document.addEventListener("DOMContentLoaded", function () {
   function startPhotoSequence() {
     function takeNextPhoto() {
       if (photoCount >= 4) {
-        form.submit();
+        console.log("✅ 4장 촬영 완료. 프리뷰 종료 요청");
+        fetch('http://127.0.0.1:5051/stop_preview')
+          .then(() => {
+            console.log("🛑 프리뷰 정상 종료");
+            form.submit();
+          })
+          .catch(err => {
+            console.error("❌ 프리뷰 종료 실패:", err);
+            form.submit();
+          });
         return;
       }
 
@@ -40,30 +50,25 @@ document.addEventListener("DOMContentLoaded", function () {
           timerDisplay.style.color = "red";
           shutterSound.play();
 
-          // ✅✅✅ 여기가 수정된 부분!
-          fetch('/stop_preview')
-            .then(() => {
-              console.log("✅ 프리뷰 정상 종료됨 → 촬영 시작");
-              return fetch('/capture', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ index: photoCount })
-              });
-            })
-            .then(res => res.json())
-            .then(data => {
-              if (data.success) {
-                console.log(`${photoCount}번째 사진 촬영 성공`);
-                setTimeout(takeNextPhoto, 3000); // 다음 컷으로 이동
-              } else {
-                console.error(`${photoCount}번째 사진 실패:`, data.error);
-                alert(`❌ ${photoCount}번째 사진 실패: ${data.error}`);
-              }
-            })
-            .catch(err => {
-              console.error("📸 fetch 오류 발생:", err);
-              alert(`❌ ${photoCount}번째 사진 실패: 네트워크 오류`);
-            });
+          fetch('/capture', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ index: photoCount })
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              console.log(`${photoCount}번째 사진 촬영 성공`);
+              setTimeout(takeNextPhoto, 1000);
+            } else {
+              console.error(`${photoCount}번째 사진 실패:`, data.error);
+              alert(`❌ ${photoCount}번째 사진 실패: ${data.error}`);
+            }
+          })
+          .catch(err => {
+            console.error("📸 fetch 오류 발생:", err);
+            alert(`❌ ${photoCount}번째 사진 실패: 네트워크 오류`);
+          });
         }
       }, 1000);
     }
