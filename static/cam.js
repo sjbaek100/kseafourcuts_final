@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
       photoCount++;
       countDisplay.textContent = `${photoCount}/4`;
 
-      let countdown = 10;
+      let countdown = 3;
       timerDisplay.textContent = countdown;
 
       const countdownInterval = setInterval(() => {

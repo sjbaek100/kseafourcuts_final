@@ -57,9 +57,22 @@ def create_collage_with_qr(photo_folder, frame_img_path):
     # 7. QR 코드 생성
     session_folder_name = os.path.basename(photo_folder)
     qr_url = f"https://ksea4cuts.kro.kr/{session_folder_name}/final.jpg"
-    qr = qrcode.make(qr_url)
-    qr = np.array(qr.convert('RGB'))
-    qr = cv2.resize(qr, (200, 200))  # QR 코드 크기 이전: 300, 300
+    qr_instance = qrcode.QRCode(
+    version=1,  # QR 코드 버전 (1: 가장 작음 ~ 40: 가장 큼)
+    error_correction=qrcode.constants.ERROR_CORRECT_H,
+    box_size=20,  # ✔️ 박스 사이즈 (기본이 10, 더 키우면 원본 크기 커짐)
+    border=4,  # 테두리 두께
+    )
+
+    qr_instance.add_data(qr_url)
+    qr_instance.make(fit=True)
+
+    qr_img = qr_instance.make_image(fill_color="black", back_color="white")
+    qr = np.array(qr_img.convert('RGB'))
+
+    # 이제 resize 하면 확실히 줄어듭니다
+    qr = cv2.resize(qr, (120, 120))
+    
 
     qr_h, qr_w = qr.shape[:2]
     margin = 30

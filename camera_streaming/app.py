@@ -4,7 +4,7 @@ import threading
 
 app = Flask(__name__)
 
-cap = cv2.VideoCapture(0, cv2.CAP_AVFOUNDATION)
+cap = cv2.VideoCapture(0, cv2.CAP_AVFOUNDATION)  # USB3.0 캡처 카드 사용
 lock = threading.Lock()
 
 @app.route('/preview')

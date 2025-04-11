@@ -1,12 +1,8 @@
 import os
 
-def get_latest_photo_folder(base_dir="static/photos"):
-    folders = [
-        os.path.join(base_dir, f)
-        for f in os.listdir(base_dir)
-        if os.path.isdir(os.path.join(base_dir, f))
-    ]
-    if not folders:
-        return None
-    latest = max(folders, key=os.path.getmtime)
-    return latest
+def get_latest_photo_folder():
+    try:
+        with open('static/last_folder.txt', 'r') as f:
+            return f.read().strip()
+    except FileNotFoundError:
+        raise RuntimeError("❌ 최신 폴더 정보를 찾을 수 없습니다.")
