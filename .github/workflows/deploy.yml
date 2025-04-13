@@ -1,0 +1,36 @@
+name: 🚀 Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치 푸시 시 실행
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout main branch
+      uses: actions/checkout@v4
+      with:
+        lfs: true  # LFS 포함해서 체크아웃
+
+    - name: Set up Node.js (필수는 아니지만 추천)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install GitHub Pages deploy action
+      run: npm install -g gh-pages
+
+    - name: Deploy to GitHub Pages
+      run: |
+        git config --global user.name "sjbaek100"
+        git config --global user.email "154967960+sjbaek100@users.noreply.github.com"
+
+        git checkout -b gh-pages
+
+        git add .
+        git commit -m "🚀 Deploy from GitHub Actions"
+        
+        git push --force origin gh-pages
