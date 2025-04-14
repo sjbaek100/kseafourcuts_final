@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>final</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body onload="showLoading()">
+
+<h2>Preview | 미리보기</h2>
+<div class="resulting">
+    <div class="final_image">
+        {% set final_image = request.args.get('final_image') %}
+        {% set session_folder = final_image.split('/')[1] %}
+        {% set static_folder = 'static/photos/' + session_folder %}
+
+        {% if final_image %}
+            {% set filename = final_image.split('/')[-1] %}
+            <img src="{{ url_for('static', filename=final_image.replace('static/', '')) }}" alt="최종 이미지">
+
+            <div class="btn-box">
+                <a href="{{ url_for('download_file', session=session_folder, filename=filename) }}"></a>
+            </div>
+        {% else %}
+            <img class="errorphoto" src="{{ url_for('static', filename='photos/20250331_174125/final.jpg') }}" alt="에러 이미지">
+        {% endif %}
+            </div>
+
+    <div class="instruction">
+        <div id="loading" class="loading-inline" style="display: flex;">
+            <div class="spinner"></div>
+            <p>Printing ... | 출력 중 ...</p>
+        </div>
+        <div class="para">
+            <p>
+                Please wait outside, and once the printing is complete, the staff will bring you your photo.
+                <br><span style="color:#3954A6;">You can download the image file via QR code after 6 pm today.</span>
+                <br>We’d love to see you again!
+                <br><br><br>밖에서 잠시 기다려 주시면, 프린트가 완료된 후 담당 임원이 사진을 전달해 드릴 예정입니다.
+                <br><span style="color:#3954A6;">QR 코드를 통해 이미지 파일을 오늘 오후 6시 이후에 다운로드하실 수 있습니다.</span>
+                <br>오늘 방문해 주셔서 감사합니다. <br>저희 이벤트도 많은 관심 부탁드립니다!
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="back-button">
+    <form action="{{ url_for('start') }}" method="get">
+        <button type="submit" class="styled-button">처음으로</button>
+    </form>
+</div>    
+
+<script>
+    window.onload = function () {
+        const imagePath = "{{ static_folder }}/final_with_qr.jpg";
+        if (!imagePath) {
+            console.warn("⚠️ 이미지 경로 없음. 프린트 요청 안 보냄");
+            return;
+        }
+
+        // 프린트 요청
+        fetch('/print', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ path: imagePath })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                console.log("🖨️ 프린트 요청 성공");
+            } else {
+                console.error("❌ 프린트 실패:", data.error);
+            }
+        })
+        .catch(err => {
+            console.error("⚠️ 프린트 요청 중 오류 발생:", err);
+        });
+    };
+</script>
+
+</body>
+</html>

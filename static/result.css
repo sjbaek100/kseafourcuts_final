@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('/static/Cafe24Ssurround-v2.0.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: sans-serif;
+    text-align: center;
+    font-family: 'Cafe24Ssurround';
+}
+
+h2{
+    font-size: 20pt;
+    width: 100%;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.resulting{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.final_image{
+    width: 600px;
+}
+.final_image img{
+    width: 100%;
+}
+
+
+/* 로딩 오버레이 */
+.loading-inline {
+    display: flex;
+    flex-direction: column; /* 👉 세로 정렬 추가! */
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* 로딩 스피너 */
+.spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3954A6;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+    margin-left: 5%;
+}
+
+.loading-inline p{
+    font-size: 25px;
+    margin-left: 7%;
+}
+
+.para{
+    font-size: 20px;
+    margin-left: 10%;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.back-button {
+    display: flex;
+    justify-content: center;
+}
+
+.styled-button {
+    font-family: 'Cafe24Ssurround', sans-serif;
+    font-size: 15px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #3954A6;
+    border: 2px solid #3954A6;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}

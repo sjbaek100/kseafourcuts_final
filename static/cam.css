@@ -1,0 +1,178 @@
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('/static/Cafe24Ssurround-v2.0.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html{
+    width:100%;
+    height: 100%;
+}
+body{
+    background-color:rgb(255, 255, 255);
+    width:100%;
+    height: 100%;
+    position: relative;
+}
+
+.info{
+    padding:5%;
+}
+
+#timer {
+    font-size: 3em;
+    font-family: 'Cafe24Ssurround';
+    font-weight: 50;
+    color: rgb(0, 0, 0);
+    width: 100%;
+}
+
+#timer div {
+    display: inline-block;
+    min-width: 45px;
+    padding: 5px;
+    background: #020b43;
+    border-radius: 80px;
+    border: 2px solid #3954A6;
+    text-align: center;
+}
+
+#timer div span {
+    font-family: 'Cafe24Ssurround';
+    color: #ffffff;
+    display: block;
+    margin-top: 15px;
+    font-size: .10em;
+    font-weight: 200;
+}
+#count {
+    font-size: 25pt;
+    font-family: 'Cafe24Ssurround';
+    font-weight: bold;
+}
+
+.cambox{
+    border-color: #3954A6;
+    border-style:solid;
+    border-top-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
+    border-right-width: medium;
+    border-radius: 0px;
+    width: 800px;
+    aspect-ratio: 134.92/88.1079 ; 
+    padding: 5px 5px 5px 5px;
+    border-width: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* 넘치는 이미지 crop */
+}
+
+.camera{
+    width: 1400px;
+    height: 100%; /* height 고정 */
+    position: relative;
+    overflow: hidden;
+}
+
+.camera img {
+    height: 300%;
+    width: auto;
+    aspect-ratio: 88.1079 / 134.92;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%) rotate(90deg) scaleX(-1);
+    display: block;
+}
+
+
+
+video#cam {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 134.92/88.1079 ;
+
+    object-fit: cover !important;
+    display: block !important;
+    transform: scaleX(-1) !important;
+}
+
+p{
+    font-size: 25pt;
+    color:rgb(0, 0, 0);
+    font-family: 'Cafe24Ssurround';
+}
+h3{
+    font-family: 'Cafe24Ssurround';
+    margin-top: -5%;
+
+}
+.popup {
+    display: grid; /*hide setting*/
+    gap: 30%;
+    position: fixed;
+    left: 15.7%;
+    top: 20.2%;
+    z-index: 9999;
+    background: transparent;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    height: 554px;
+    width: 1000px;
+}
+
+p{
+    font-size: 35pt;
+    color:rgb(0, 0, 0);
+    font-family: 'Cafe24Ssurround';
+    text-align: center;
+    line-height: 3;
+    margin-left: -3%;
+}
+
+#start {
+    font-family: 'Cafe24Ssurround';
+    font-size: xx-large;
+    color: white;
+    border-color: #3954A6;
+    width: 250px;
+    height: 75px;
+    background-color: #3954A6;
+    margin-left: 30%;
+    margin-top: -10%;
+    border-radius: 50px;
+    display: block;
+    border-style: solid;
+    border-width: medium;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#start:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #3954A6;
+}
+
+.cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    z-index: 1;
+    backdrop-filter: blur(30px);
+    transition: all ease 1s;
+}
+

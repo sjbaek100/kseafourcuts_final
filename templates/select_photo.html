@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>사진 선택</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='select_photos.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <h1>원하는 사진을 선택하세요 (최대 4장)</h1>
+    <form method="post" action="/select_frame">
+      <div class="grid">
+        {% for photo in photos %}
+          <label class="photo-item">
+            <input type="checkbox" name="selected_photos" value="{{ photo }}" onchange="checkSelection(this)" />
+            <img src="{{ url_for('static', filename='photos/' + session_folder + '/' + photo) }}" alt="Photo" />
+          </label>
+        {% endfor %}
+      </div>
+      <p id="error-message" style="color: red; display: none;">최대 4장까지만 선택할 수 있습니다.</p>
+      <button type="submit">다음</button>
+    </form>
+  </div>
+
+  <script>
+    function checkSelection(checkbox) {
+      const checked = document.querySelectorAll('input[name="selected_photos"]:checked');
+      const errorMessage = document.getElementById('error-message');
+
+      if (checked.length > 4) {
+        checkbox.checked = false;
+        errorMessage.style.display = 'block';
+      } else {
+        errorMessage.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

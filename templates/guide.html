@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guide</title>
+        <style>
+            @font-face {
+                font-family: 'Cafe24Ssurround';
+                src: url('static/Cafe24Ssurround-v2.0.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            html {
+                width: 100%;
+                height: 100%;
+            }
+
+            body {
+                background-color: #fff;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .anim {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .photo {
+                margin-top: 0%;
+                width: 300px;
+                height: auto;
+                object-fit: cover;
+            }
+            .container {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 5%;
+                width: 90%;
+            }
+            
+            .hello, .korean {
+                margin-top:-5%;
+                font-family: 'Cafe24Ssurround';
+                font-size: 16pt;
+                text-align: center;
+                width: 48%;
+            }
+
+            .nextbutton {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                text-align: right;
+                padding-right: 20px;
+                margin-top: -5%;
+            }
+
+            .styled-button {
+                font-family: 'Cafe24Ssurround';
+                font-size: 15px;
+                padding: 10px 20px;
+                color: white;
+                border-color: #3954A6;
+                width: auto;
+                height: auto;
+                background-color: #3954A6;
+                border-radius: 50px;
+                margin-left: 0%;
+                border-style: solid;
+                border-width: medium;
+            }
+
+            .nextbutton{
+                position: absolute;
+                left:47%;
+                top:100%;
+            }
+
+            .styled-button:hover {
+                background-color: white;
+                color: black;
+                border: 2px solid #3954A6;
+            }
+        </style>
+        <link rel="stylesheet" href="{{ url_for('static', filename='anim.css') }}">
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    </head>
+    <body>
+        <div class="countdown" style="font-family: 'Cafe24Ssurround'; font-size: 20pt; margin-top: 10pxm ;margin-left:-1200px;">
+            <span id="count">10</span>
+        </div>
+        <div class="anim">
+            <img class="photo" src="{{ url_for('static', filename='images/ucdksealogo_nobackground.jpeg') }}">
+        </div>
+        <div class="container">
+            <div class="hello">
+                <p>
+                    The camera will automatically take 4 photos, one every 10 seconds.
+                    <br>The streaming preview may not reflect the final photo result.
+                    <br>Stay still until you hear the shutter sound, as there may be a slight delay.
+                    <br>You cannot select photos.
+                    <br><span style="color:red; ">NO RETAKES ALLOWED AFTER THE PHOTO IS TAKEN<br>PLEASE DO NOT TOUCH THE CAMERA AND SCREEN</span> 
+                </p>
+            </div>
+            <div class="korean">
+                <p>
+                    10초 마다 자동으로 총 4장의 사진 촬영이 진행됩니다.
+                    <br>스트리밍 화면은 참고용이며, 실제 촬영 결과물과는 기기 차이로 인해 일부 차이가 있을 수 있습니다.
+                    <br>촬영 시 약간의 지연이 발생할 수 있습니다. 셔터 소리가 들릴 때까지 움직이지 마세요.
+                    <br>원하는 사진을 고를 수 없습니다.
+                    <br><span style="color:red; ">재촬영은 불가능합니다<br>카메라와 스크린을 절대 만지지 마세요</span>
+                </p>
+            </div>
+        </div>
+        <!-- <div class="nextbutton">
+            <form action="{{ url_for('cam') }}" method="get">
+                <button type="submit" class="styled-button">Next</button>
+            </form>
+        </div> -->
+        <script>
+            let timeLeft = 10;
+            const countElement = document.getElementById('count');
+        
+            const countdown = setInterval(function() {
+                timeLeft--;
+                countElement.textContent = timeLeft;
+        
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    window.location.href = "{{ url_for('cam') }}";
+                }
+            }, 1000);
+        </script>        
+    </body>
+</html>

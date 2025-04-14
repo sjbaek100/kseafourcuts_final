@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'Cafe24Ssurround';
+  src: url('/static/Cafe24Ssurround-v2.0.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+    font-family: sans-serif;
+    text-align: center;
+    font-family: 'Cafe24Ssurround';
+  }
+
+  h2{
+    font-size: 20pt;
+    width: 100%;
+    text-align: center;
+    margin-top: 2%;
+  }
+
+  #frame-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    justify-content: center;
+  }
+
+  .frame-option {
+    display: inline-block;
+    margin: 10px;
+    border: 3px solid transparent;
+    cursor: pointer;
+  }
+
+  .frame-option.selected {
+    border: 3px solid #3954A6;
+  }
+
+  .frame-option img {
+    width: 15vw;
+    height: auto;
+  }
+  
+  button {
+    font-family: 'Cafe24Ssurround';
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: white;
+    border-color: #3954A6;
+    width: 250px;
+    height: 75px;
+    background-color: #3954A6;
+    border-radius: 50px;
+    display: block;
+    margin: auto;
+    border-style: solid;
+    border-width: medium;
+}
+.button:hover {
+  color: #acacac;
+}
+
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}

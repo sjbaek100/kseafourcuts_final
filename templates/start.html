@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='start.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='anim.css') }}">
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    </head>
+    <body>
+        <div class="container">
+            <div id="wrapper">
+                <div class="anim">
+                    <img class="photo" src="{{ url_for('static', filename='images/ucdksealogo_nobackground.jpeg') }}">
+                </div>
+                <div class="anim1">
+                    <button onclick="start();" class="startbutton click" type="button">START</button>
+                </div>
+            </div>
+        </div> 
+        <script>
+            function start() {
+                window.location.href = "{{ url_for('guide') }}";
+            }
+        </script>
+        <script src="{{ url_for('static', filename='anim.js') }}"></script>
+    </body>
+</html>

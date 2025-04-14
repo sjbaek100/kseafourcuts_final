@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>frame</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='select_frame.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+
+</head>
+<body>
+  <h2>Select the frame | 프레임을 선택하세요</h2>
+  <form action="{{ url_for('apply_frame') }}" method="post">
+    <div id="frame-container">
+      {% for i in range(1, 7) %}
+        <label class="frame-option">
+          <input type="radio" name="frame" value="frame{{ i }}.png" style="display:none;" required>
+          <img src="{{ url_for('static', filename='frames/frame' + i|string + '.png') }}">
+        </label>
+      {% endfor %}
+    </div>
+    <button type="submit">Apply | 적용하기</button>
+  </form>
+
+  <script>
+    const options = document.querySelectorAll('.frame-option');
+    options.forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault(); // ✅ 기본 동작 방지
+        options.forEach(o => o.classList.remove('selected'));
+        option.classList.add('selected');
+        option.querySelector('input[type=radio]').checked = true;
+      });
+    });
+  </script>
+</body>
+</html>
